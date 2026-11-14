@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SafeAir: демо-панель</title>
+<style>
+:root{--ink:#17222b;--mu:#62707b;--bg:#eef2f5;--card:#fff;--bd:#d6dee4;--ok:#1f8a55;--bad:#d93a3a;--off:#7b8791;--acc:#1b4f72}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--acc);color:#fff;padding:14px 20px}
+header h1{margin:0;font-size:20px}header p{margin:2px 0 0;opacity:.85;font-size:13px}
+.warn{background:#fff3cd;color:#5c4400;padding:8px 20px;font-size:13px;border-bottom:1px solid #ecd68a}
+main{max-width:1000px;margin:0 auto;padding:16px}
+h2{font-size:16px;margin:18px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.dev{background:var(--card);border:1px solid var(--bd);border-top:6px solid var(--ok);border-radius:10px;padding:14px}
+.dev.alarm{border-top-color:var(--bad);animation:p 1s infinite alternate}
+.dev.off{border-top-color:var(--off)}
+@keyframes p{to{box-shadow:0 0 0 4px #d93a3a33}}
+@media(prefers-reduced-motion:reduce){.dev.alarm{animation:none}}
+.dev h3{margin:0;font-size:17px}
+.st{font-size:22px;font-weight:700;margin:6px 0}
+.ok .st{color:var(--ok)}.alarm .st{color:var(--bad)}.off .st{color:var(--off)}
+.m{display:flex;gap:14px;color:var(--mu);font-size:13px;flex-wrap:wrap}.m b{color:var(--ink)}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+button{font:inherit;padding:6px 10px;border-radius:7px;border:1px solid var(--bd);background:#fff;color:var(--ink);cursor:pointer}
+button.r{background:var(--bad);border-color:var(--bad);color:#fff}button.g{background:var(--ok);border-color:var(--ok);color:#fff}
+button:focus-visible{outline:3px solid #3b7dd8;outline-offset:2px}button:disabled{opacity:.45;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd);font-size:14px}th{background:#f6f9fb;color:var(--mu);font-weight:600}
+.wrap{overflow-x:auto}.empty{padding:14px;color:var(--mu)}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;opacity:0;transition:.2s;pointer-events:none;max-width:90%}
+#toast.on{opacity:1}
+footer{max-width:1000px;margin:0 auto;padding:6px 16px 28px;color:var(--mu);font-size:13px}
+</style></head><body>
+<header><h1>SafeAir: панель устройств (демо)</h1><p>Датчик газа и дыма + температура. Статус, тревоги, журнал событий.</p></header>
+<div class="warn"><b>Демонстрация.</b> Данные имитируются в браузере и не связаны с реальными устройствами. Панель не заменяет штатную пожарную сигнализацию и не вызывает экстренные службы.</div>
+<main>
+ <h2>Устройства <span style="font-weight:400;color:var(--mu)">(тестовые данные)</span></h2>
+ <div class="grid" id="devs"></div>
+ <h2>Журнал событий</h2>
+ <div class="wrap" id="log"></div>
+ <div class="row"><button onclick="reset()">Сбросить демо</button></div>
+</main>
+<footer>Как в реальной системе: плата шлёт heartbeat, устройство без сигнала дольше 30 секунд считается «нет связи», каждое событие хранит время начала, конца и длительность. Реальные уведомления приходят push-сообщением в Android-приложение.</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const r=(a,b)=>a+Math.random()*(b-a);
+const mk=(n,t,h)=>({name:n,online:true,alarm:false,gas:210,temp:t,hum:h,last:Date.now()});
+let D,L,TT;
+function reset(){D=[mk('Кухня',23.4,48),mk('Гараж',19.8,41),mk('Школа, кабинет 12',22.1,45)];D[2].online=false;D[2].last=Date.now()-90000;L=[];draw()}
+const fd=t=>new Date(t).toLocaleTimeString('ru-RU');
+const dur=s=>s<60?s+' с':Math.floor(s/60)+' мин '+(s%60)+' с';
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(TT);TT=setTimeout(()=>e.classList.remove('on'),4000)}
+function start(i){const d=D[i];if(!d.online||d.alarm)return;d.alarm=true;d.ev={dev:d.name,start:Date.now(),end:null};L.unshift(d.ev);toast('Тревога: газ или дым. '+d.name);draw()}
+function stop(i){const d=D[i];if(!d.alarm)return;d.alarm=false;d.ev.end=Date.now();toast('Тревога закончилась. '+d.name);draw()}
+function net(i){const d=D[i];d.online=!d.online;if(d.online)d.last=Date.now();else toast('Нет связи с устройством: '+d.name);draw()}
+function tick(){D.forEach(d=>{if(!d.online)return;d.last=Date.now();d.gas=Math.round(d.alarm?r(620,700):r(195,225));d.temp=+(d.temp+r(-.1,.1)).toFixed(1);d.hum=Math.round(Math.min(60,Math.max(35,d.hum+r(-1,1))))});draw()}
+function draw(){
+ document.getElementById('devs').innerHTML=D.map((d,i)=>{
+  const off=!d.online||Date.now()-d.last>30000,c=off?'off':d.alarm?'alarm':'ok',t=off?'Нет связи':d.alarm?'Тревога':'Норма';
+  const ago=Math.round((Date.now()-d.last)/1000);
+  return`<div class="dev ${c}"><h3>${d.name}</h3><div class="st">${t}</div><div class="m"><span>Газ: <b>${off?'—':d.gas}</b></span><span>Темп.: <b>${off?'—':d.temp+' °C'}</b></span><span>Влажн.: <b>${off?'—':d.hum+' %'}</b></span></div><div class="m" style="margin-top:4px">Последний сигнал: ${ago<2?'только что':dur(ago)+' назад'}</div>
+  <div class="row"><button class="r" onclick="start(${i})" ${off||d.alarm?'disabled':''}>Симулировать газ</button><button class="g" onclick="stop(${i})" ${d.alarm?'':'disabled'}>Отбой</button><button onclick="net(${i})">${d.online?'Отключить связь':'Вернуть связь'}</button></div></div>`}).join('');
+ document.getElementById('log').innerHTML=L.length?`<table><tr><th>Устройство</th><th>Начало</th><th>Конец</th><th>Длительность</th></tr>${L.map(e=>`<tr><td>${e.dev}</td><td>${fd(e.start)}</td><td>${e.end?fd(e.end):'<b style="color:var(--bad)">идёт</b>'}</td><td>${dur(Math.round(((e.end||Date.now())-e.start)/1000))}</td></tr>`).join('')}</table>`:'<div class="empty">Событий пока нет. Нажмите «Симулировать газ» у любого устройства.</div>';
+}
+reset();setInterval(tick,1000);
+</script></body></html>

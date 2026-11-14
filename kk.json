@@ -1,0 +1,102 @@
+{
+  "auth": {
+    "brand": "SafeAir",
+    "emailLabel": "Email",
+    "passwordLabel": "Құпия сөз",
+    "signInButton": "Кіру",
+    "createAccountButton": "Аккаунт жасау",
+    "emailRequired": "Email енгізіңіз",
+    "passwordRequired": "Құпия сөзді енгізіңіз",
+    "errorInvalidEmail": "Email дұрыс емес.",
+    "errorUserDisabled": "Бұл аккаунт өшірілген.",
+    "errorUserNotFound": "Мұндай email-мен пайдаланушы табылмады.",
+    "errorWrongPassword": "Email немесе құпия сөз қате.",
+    "errorEmailInUse": "Бұл email бұрын тіркелген.",
+    "errorWeakPassword": "Құпия сөз тым қарапайым (кемінде 6 таңба).",
+    "errorGeneric": "Қате: {}"
+  },
+  "signup": {
+    "title": "Аккаунт жасау",
+    "passwordLabel": "Құпия сөз (кемінде 6 таңба)",
+    "passwordTooShort": "Кемінде 6 таңба",
+    "confirmPasswordLabel": "Құпия сөзді қайталаңыз",
+    "passwordsMismatch": "Құпия сөздер сәйкес келмейді",
+    "signUpButton": "Тіркелу"
+  },
+  "devices": {
+    "title": "Менің құрылғыларым",
+    "emptyTitle": "Әзірге құрылғы жоқ",
+    "emptyHint": "Біріншісін қосу үшін + басыңыз",
+    "addDeviceButton": "Құрылғы қосу",
+    "statusAlarm": "Газ ағуы!",
+    "statusOk": "Қалыпты",
+    "statusOffline": "Желіде жоқ",
+    "error": "Қате: {}"
+  },
+  "deviceDetail": {
+    "history": "Ағу тарихы",
+    "noEvents": "Әзірге ешбір ағу тіркелмеген",
+    "activeAlarm": "Дабыл әлі белсенді",
+    "resolvedIn": "{} ішінде жойылды",
+    "renameAction": "Атын өзгерту",
+    "deleteActionLast": "Жою",
+    "deleteActionLeave": "Шығу",
+    "renameDialogTitle": "Құрылғы атын өзгерту",
+    "cancel": "Бас тарту",
+    "save": "Сақтау",
+    "deleteDialogTitleLast": "Құрылғыны жою керек пе?",
+    "deleteDialogTitleLeave": "Құрылғыдан шығу керек пе?",
+    "deleteDialogBodyLast": "Сіз соңғы қатысушысыз — құрылғы барлық аккаунттардан толық жойылады. Ағу тарихы дерекқорда сақталады, бірақ енді ешкімге көрінбейді.",
+    "deleteDialogBodyLeave": "\"{}\" құрылғысы сіздің аккаунтыңыздан ажыратылады, бірақ басқа қатысушыларға көрінуін жалғастырады.",
+    "error": "Қате: {}",
+    "sensors": "Көрсеткіштер",
+    "temperature": "Температура",
+    "humidity": "Ылғалдылық",
+    "gasLevel": "Газ (MQ-2)"
+  },
+  "addDevice": {
+    "title": "Құрылғы қосу",
+    "scanButton": "QR-кодты сканерлеу",
+    "orManual": "немесе қолмен",
+    "deviceIdLabel": "Device ID",
+    "deviceIdHint": "мысалы esp8266-test-01",
+    "deviceIdRequired": "Device ID енгізіңіз",
+    "secretLabel": "Құрылғы құпиясы",
+    "secretError": "Құпия кемінде 8 таңбадан тұруы керек",
+    "nameLabel": "Атауы",
+    "nameHint": "мысалы Ас үй",
+    "nameRequired": "Атауын енгізіңіз",
+    "addButton": "Қосу",
+    "qrRecognized": "QR-код танылды, деректерді тексеріңіз",
+    "qrParseError": "QR-кодты оқу мүмкін болмады — қолмен толтырыңыз",
+    "addFailed": "Құрылғыны қосу мүмкін болмады: {}"
+  },
+  "qrScanner": {
+    "title": "QR-кодты сканерлеу",
+    "hint": "Камераны құрылғыдағы QR-кодқа бағыттаңыз"
+  },
+  "stats": {
+    "title": "Статистика — {}",
+    "noData": "Әзірге статистика үшін деректер жоқ",
+    "totalLeaks": "Барлық ағулар",
+    "avgDuration": "Орт. жою уақыты",
+    "longestDuration": "Ең ұзақ жойылған",
+    "monthlyChart": "Айлар бойынша ағулар",
+    "eventsFooter": "Тарихтағы соңғы {} оқиға есептелді"
+  },
+  "settings": {
+    "title": "Баптаулар",
+    "language": "Тіл",
+    "languageRu": "Русский",
+    "languageKk": "Қазақша",
+    "languageEn": "English"
+  },
+  "lastSeen": {
+    "never": "Әлі байланыста болған жоқ",
+    "justNow": "Дәл қазір желіде",
+    "secondsAgo": "{} {} бұрын байланыста болды",
+    "minutesAgo": "{} {} бұрын байланыста болды",
+    "hoursAgo": "{} {} бұрын байланыста болды",
+    "daysAgo": "{} {} бұрын байланыста болды"
+  }
+}

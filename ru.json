@@ -1,0 +1,102 @@
+{
+  "auth": {
+    "brand": "SafeAir",
+    "emailLabel": "Email",
+    "passwordLabel": "Пароль",
+    "signInButton": "Войти",
+    "createAccountButton": "Создать аккаунт",
+    "emailRequired": "Введите email",
+    "passwordRequired": "Введите пароль",
+    "errorInvalidEmail": "Некорректный email.",
+    "errorUserDisabled": "Этот аккаунт отключён.",
+    "errorUserNotFound": "Пользователь с таким email не найден.",
+    "errorWrongPassword": "Неверный email или пароль.",
+    "errorEmailInUse": "Этот email уже зарегистрирован.",
+    "errorWeakPassword": "Пароль слишком простой (минимум 6 символов).",
+    "errorGeneric": "Ошибка: {}"
+  },
+  "signup": {
+    "title": "Создать аккаунт",
+    "passwordLabel": "Пароль (минимум 6 символов)",
+    "passwordTooShort": "Минимум 6 символов",
+    "confirmPasswordLabel": "Повторите пароль",
+    "passwordsMismatch": "Пароли не совпадают",
+    "signUpButton": "Зарегистрироваться"
+  },
+  "devices": {
+    "title": "Мои платы",
+    "emptyTitle": "Плат пока нет",
+    "emptyHint": "Нажмите + чтобы добавить первую",
+    "addDeviceButton": "Добавить плату",
+    "statusAlarm": "Утечка газа!",
+    "statusOk": "В норме",
+    "statusOffline": "Офлайн",
+    "error": "Ошибка: {}"
+  },
+  "deviceDetail": {
+    "history": "История утечек",
+    "noEvents": "Утечек пока не зафиксировано",
+    "activeAlarm": "Тревога ещё активна",
+    "resolvedIn": "Устранено за {}",
+    "renameAction": "Переименовать",
+    "deleteActionLast": "Удалить",
+    "deleteActionLeave": "Покинуть",
+    "renameDialogTitle": "Переименовать плату",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "deleteDialogTitleLast": "Удалить плату?",
+    "deleteDialogTitleLeave": "Покинуть плату?",
+    "deleteDialogBodyLast": "Вы последний участник — плата будет полностью удалена из аккаунтов. История утечек в базе останется, но больше не будет никому видна.",
+    "deleteDialogBodyLeave": "Плата \"{}\" будет отвязана от вашего аккаунта, но останется видна остальным участникам.",
+    "error": "Ошибка: {}",
+    "sensors": "Показания",
+    "temperature": "Температура",
+    "humidity": "Влажность",
+    "gasLevel": "Газ (MQ-2)"
+  },
+  "addDevice": {
+    "title": "Добавить плату",
+    "scanButton": "Сканировать QR-код",
+    "orManual": "или вручную",
+    "deviceIdLabel": "Device ID",
+    "deviceIdHint": "например esp8266-test-01",
+    "deviceIdRequired": "Введите device ID",
+    "secretLabel": "Секрет платы",
+    "secretError": "Секрет должен быть не короче 8 символов",
+    "nameLabel": "Название",
+    "nameHint": "например Кухня",
+    "nameRequired": "Введите название",
+    "addButton": "Добавить",
+    "qrRecognized": "QR-код распознан, проверьте данные",
+    "qrParseError": "Не удалось разобрать QR-код — заполните вручную",
+    "addFailed": "Не удалось добавить устройство: {}"
+  },
+  "qrScanner": {
+    "title": "Сканировать QR-код",
+    "hint": "Наведите камеру на QR-код на плате"
+  },
+  "stats": {
+    "title": "Статистика — {}",
+    "noData": "Данных для статистики пока нет",
+    "totalLeaks": "Всего утечек",
+    "avgDuration": "Средн. устранение",
+    "longestDuration": "Дольше всего устранялась",
+    "monthlyChart": "Утечки по месяцам",
+    "eventsFooter": "Учтены последние {} событий из истории"
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "languageRu": "Русский",
+    "languageKk": "Қазақша",
+    "languageEn": "English"
+  },
+  "lastSeen": {
+    "never": "Ещё не выходила на связь",
+    "justNow": "В сети только что",
+    "secondsAgo": "Была на связи {} {} назад",
+    "minutesAgo": "Была на связи {} {} назад",
+    "hoursAgo": "Была на связи {} {} назад",
+    "daysAgo": "Была на связи {} {} назад"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "auth": {
+    "brand": "SafeAir",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signInButton": "Sign in",
+    "createAccountButton": "Create account",
+    "emailRequired": "Enter your email",
+    "passwordRequired": "Enter your password",
+    "errorInvalidEmail": "Invalid email.",
+    "errorUserDisabled": "This account has been disabled.",
+    "errorUserNotFound": "No user found with this email.",
+    "errorWrongPassword": "Incorrect email or password.",
+    "errorEmailInUse": "This email is already registered.",
+    "errorWeakPassword": "Password is too weak (minimum 6 characters).",
+    "errorGeneric": "Error: {}"
+  },
+  "signup": {
+    "title": "Create account",
+    "passwordLabel": "Password (minimum 6 characters)",
+    "passwordTooShort": "Minimum 6 characters",
+    "confirmPasswordLabel": "Confirm password",
+    "passwordsMismatch": "Passwords do not match",
+    "signUpButton": "Sign up"
+  },
+  "devices": {
+    "title": "My Devices",
+    "emptyTitle": "No devices yet",
+    "emptyHint": "Tap + to add your first one",
+    "addDeviceButton": "Add device",
+    "statusAlarm": "Gas leak!",
+    "statusOk": "Normal",
+    "statusOffline": "Offline",
+    "error": "Error: {}"
+  },
+  "deviceDetail": {
+    "history": "Leak history",
+    "noEvents": "No leaks recorded yet",
+    "activeAlarm": "Alarm still active",
+    "resolvedIn": "Resolved in {}",
+    "renameAction": "Rename",
+    "deleteActionLast": "Delete",
+    "deleteActionLeave": "Leave",
+    "renameDialogTitle": "Rename device",
+    "cancel": "Cancel",
+    "save": "Save",
+    "deleteDialogTitleLast": "Delete device?",
+    "deleteDialogTitleLeave": "Leave device?",
+    "deleteDialogBodyLast": "You are the last member — the device will be completely removed from all accounts. Its leak history stays in the database but won't be visible to anyone anymore.",
+    "deleteDialogBodyLeave": "The device \"{}\" will be removed from your account, but will remain visible to the other members.",
+    "error": "Error: {}",
+    "sensors": "Readings",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "gasLevel": "Gas (MQ-2)"
+  },
+  "addDevice": {
+    "title": "Add a device",
+    "scanButton": "Scan QR code",
+    "orManual": "or enter manually",
+    "deviceIdLabel": "Device ID",
+    "deviceIdHint": "e.g. esp8266-test-01",
+    "deviceIdRequired": "Enter a device ID",
+    "secretLabel": "Device secret",
+    "secretError": "Secret must be at least 8 characters",
+    "nameLabel": "Name",
+    "nameHint": "e.g. Kitchen",
+    "nameRequired": "Enter a name",
+    "addButton": "Add",
+    "qrRecognized": "QR code recognized, please review",
+    "qrParseError": "Could not read the QR code — please fill in manually",
+    "addFailed": "Could not add the device: {}"
+  },
+  "qrScanner": {
+    "title": "Scan QR code",
+    "hint": "Point the camera at the QR code on the device"
+  },
+  "stats": {
+    "title": "Statistics — {}",
+    "noData": "No data for statistics yet",
+    "totalLeaks": "Total leaks",
+    "avgDuration": "Avg. resolution time",
+    "longestDuration": "Longest to resolve",
+    "monthlyChart": "Leaks by month",
+    "eventsFooter": "Based on the last {} events"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageRu": "Русский",
+    "languageKk": "Қазақша",
+    "languageEn": "English"
+  },
+  "lastSeen": {
+    "never": "Never connected yet",
+    "justNow": "Online just now",
+    "secondsAgo": "Last seen {} {} ago",
+    "minutesAgo": "Last seen {} {} ago",
+    "hoursAgo": "Last seen {} {} ago",
+    "daysAgo": "Last seen {} {} ago"
+  }
+}

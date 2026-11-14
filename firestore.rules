@@ -1,0 +1,75 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ====== users/{uid} ======
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // ====== devices/{deviceId} ======
+    // Модель "несколько пользователей на одну плату": вместо одного
+    // ownerUid — массив memberUids. Присоединиться к уже существующей
+    // плате может любой авторизованный пользователь, который прислал
+    // ТОТ ЖЕ secretHash, что уже сохранён в документе — это доказывает,
+    // что он знает секрет физической платы (например, отсканировал её
+    // QR-код), без необходимости чьего-либо одобрения.
+    //
+    // Worker (backend) обходит эти правила через service account/IAM,
+    // они регулируют только доступ из Flutter-приложения.
+    match /devices/{deviceId} {
+      // Читать может только участник (любой из memberUids)
+      allow read: if request.auth != null
+                   && request.auth.uid in resource.data.memberUids;
+
+      // Первое создание платы: создатель становится единственным
+      // участником. secretHash задаётся тем, кто первым привязывает плату.
+      allow create: if request.auth != null
+                     && request.resource.data.memberUids.size() == 1
+                     && request.resource.data.memberUids[0] == request.auth.uid
+                     && request.resource.data.keys().hasAll(['memberUids', 'secretHash', 'name'])
+                     && request.resource.data.secretHash is string;
+
+      allow update: if request.auth != null && (
+        // Переименование существующим участником — состав участников
+        // и секрет не меняются.
+        (
+          request.auth.uid in resource.data.memberUids &&
+          request.resource.data.memberUids == resource.data.memberUids &&
+          request.resource.data.secretHash == resource.data.secretHash
+        )
+        ||
+        // Присоединение нового участника: прислан верный secretHash
+        // (совпадает с уже сохранённым), в список добавляется РОВНО
+        // отправитель запроса и никто другой.
+        (
+          request.resource.data.secretHash == resource.data.secretHash &&
+          !(request.auth.uid in resource.data.memberUids) &&
+          request.resource.data.memberUids == resource.data.memberUids.concat([request.auth.uid])
+        )
+        ||
+        // Участник покидает плату: убирает из списка только себя.
+        (
+          request.auth.uid in resource.data.memberUids &&
+          request.resource.data.secretHash == resource.data.secretHash &&
+          request.resource.data.memberUids == resource.data.memberUids.removeAll([request.auth.uid])
+        )
+      );
+
+      // Полное удаление документа разрешено только когда уходит
+      // последний оставшийся участник — плата не исчезает у остальных
+      // участников без их ведома.
+      allow delete: if request.auth != null
+                     && request.auth.uid in resource.data.memberUids
+                     && resource.data.memberUids.size() == 1;
+
+      // ====== devices/{deviceId}/events/{eventId} ======
+      match /events/{eventId} {
+        allow read: if request.auth != null
+                     && request.auth.uid in get(/databases/$(database)/documents/devices/$(deviceId)).data.memberUids;
+        allow write: if false;
+      }
+    }
+  }
+}
